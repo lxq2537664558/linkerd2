@@ -234,7 +234,7 @@ class Sidebar extends React.Component {
                   <Form layout="inline">
                     <Form.Item>
                       <Select
-                        defaultValue="All Namespaces"
+                        defaultValue={this.state.namespaceFilter || "All Namespaces"}
                         dropdownMatchSelectWidth={true}
                         onChange={this.handleNamespaceSelector}>
                         {
