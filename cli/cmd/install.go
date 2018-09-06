@@ -133,7 +133,8 @@ func render(config installConfig, w io.Writer, options *installOptions) error {
 	// Special case for linkerd-proxy running in the Prometheus pod.
 	injectOptions.proxyOutboundCapacity[config.PrometheusImage] = prometheusProxyOutboundCapacity
 
-	return InjectYAML(buf, w, injectOptions)
+	// throwaway the stderr buffer
+	return InjectYAML(buf, w, new(bytes.Buffer), injectOptions)
 }
 
 func validate(options *installOptions) error {
