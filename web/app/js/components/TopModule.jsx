@@ -66,7 +66,6 @@ class TopModule extends React.Component {
 
   onWebsocketRecv = e => {
     this.indexTapResult(e.data);
-    this.props.updateNeighbors(e.data);
   }
 
   onWebsocketClose = e => {
@@ -155,6 +154,10 @@ class TopModule extends React.Component {
 
     if (_.size(topResults) > this.props.maxRowsToDisplay) {
       this.deleteOldestIndexedResult(topResults);
+    }
+
+    if (d.base.proxyDirection === "INBOUND") {
+      this.props.updateNeighbors(_.get(d, "requestInit.sourceMeta.labels", null));
     }
 
     return topResults;
